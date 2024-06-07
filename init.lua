@@ -105,13 +105,16 @@ vim.opt.relativenumber = true
 -- vim.opt.relativenumber = true
 --
 -- disable line number in terminal
-vim.cmd([[
+vim.cmd [[
   autocmd TermOpen * setlocal nonumber norelativenumber
-]])
-
+]]
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
+
+-- spelling
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -244,7 +247,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',    opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -262,6 +265,14 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+    config = function()
+      require('gitsigns').setup()
+
+      vim.keymap.set('n', '<leader>g]', ':Gitsigns next_hunk<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>g[', ':Gitsigns prev_hunk<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>guh', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
+    end,
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -279,7 +290,7 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -325,7 +336,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -634,7 +645,7 @@ require('lazy').setup({
         -- Conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
         elixir = { 'mix' },
-        go = {'golines'},
+        go = { 'golines' },
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         javascript = { { 'prettierd', 'prettier' } },
@@ -669,7 +680,7 @@ require('lazy').setup({
           --   end,
           -- },
           -- vim-react-snippets for luasnip
-          "mlaursen/vim-react-snippets"
+          'mlaursen/vim-react-snippets',
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -685,18 +696,15 @@ require('lazy').setup({
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
 
-
       -- luasnip extends
-      luasnip.filetype_extend("typescript", { "javascript" })
-      luasnip.filetype_extend("typescriptreact", { "javascript" })
-      luasnip.filetype_extend("javascriptreact", { "javascript" })
-      luasnip.filetype_extend("vue", { "javascript" })
+      luasnip.filetype_extend('typescript', { 'javascript' })
+      luasnip.filetype_extend('typescriptreact', { 'javascript' })
+      luasnip.filetype_extend('javascriptreact', { 'javascript' })
+      luasnip.filetype_extend('vue', { 'javascript' })
 
-      require("luasnip.loaders.from_vscode").lazy_load()
-      require("custom.snip")
-      require("vim-react-snippets").lazy_load()
-
-
+      require('luasnip.loaders.from_vscode').lazy_load()
+      require 'custom.snip'
+      require('vim-react-snippets').lazy_load()
 
       luasnip.config.setup {}
 
@@ -762,25 +770,54 @@ require('lazy').setup({
       }
     end,
   },
+  {
+    -- colorschemes
+    { -- You can easily change to a different colorscheme.
+      -- Change the name of the colorscheme plugin below, and then
+      -- change the command in the config to whatever the name of that colorscheme is.
+      --
+      -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+      'folke/tokyonight.nvim',
+      priority = 1000, -- Make sure to load this before all the other start plugins.
+      init = function()
+        -- Load the colorscheme here.
+        -- Like many other themes, this one has different styles, and you could load
+        -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+        -- vim.cmd.colorscheme 'tokyonight-night'
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+        -- You can configure highlights by doing something like:
+        vim.cmd.hi 'Comment gui=none'
+      end,
+    },
+    { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
+    {
+      'rose-pine/neovim',
+      name = 'rose-pine',
+      priority = 1000,
+      config = function()
+        require('rose-pine').setup {
+          styles = {
+            bold = true,
+            italic = true,
+            transparency = true,
+          },
+        }
+        vim.cmd.colorscheme 'rose-pine'
+      end,
+    },
+    { 'Shatur/neovim-ayu', name = 'ayu', priority = 1000 },
+    { 'sainnhe/everforest', name = 'everforest', priority = 1000 },
+    -- Lua
+    {
+      'tjdevries/colorbuddy.nvim',
 
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
-    end,
+      priority = 1000,
+      init = function()
+        -- colorscheme add
+        -- vim.cmd.colorscheme "gruvbuddy"
+      end,
+    },
   },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -804,6 +841,9 @@ require('lazy').setup({
 
       -- auto complete inverted commas
       require('mini.pairs').setup()
+
+      -- indent scope( functino start and end show)
+      --      require('mini.indentscope').setup()
       --
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,

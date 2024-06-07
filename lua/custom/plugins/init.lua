@@ -32,6 +32,8 @@ return {
   },
   --autoclose tags
   { 'm4xshen/autoclose.nvim' },
+  -- indent blankline
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   -- wakatime
   { 'wakatime/vim-wakatime', lazy = false },
   -- discord
@@ -40,6 +42,50 @@ return {
     enabled = true,
     event = "VeryLazy",
   },
+  -- harpoon2
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    opts = {
+      menu = {
+        width = vim.api.nvim_win_get_width(0) - 4,
+      },
+      settings = {
+        save_on_toggle = true,
+      },
+    },
+    keys = function()
+      local keys = {
+        {
+          "<leader>H",
+          function()
+            require("harpoon"):list():add()
+          end,
+          desc = "Harpoon File",
+        },
+        {
+          "<leader>h",
+          function()
+            local harpoon = require("harpoon")
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+          end,
+          desc = "Harpoon Quick Menu",
+        },
+      }
+
+      for i = 1, 5 do
+        table.insert(keys, {
+          "<leader>" .. i,
+          function()
+            require("harpoon"):list():select(i)
+          end,
+          desc = "Harpoon to File " .. i,
+        })
+      end
+      return keys
+    end,
+  },
+
   -- wilder
   {
     'gelguy/wilder.nvim',
@@ -49,6 +95,42 @@ return {
       wilder.setup { modes = { ':', '/', '?' } }
     end,
   },
-
-
+  -- hardtime
+  {
+    "m4xshen/hardtime.nvim",
+    event = "VeryLazy",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {}
+  },
+  -- precognition
+  {
+    "tris203/precognition.nvim",
+    event = "VeryLazy",
+  },
+  -- test http requirest
+  {
+    'diepm/vim-rest-console',
+  },
+  -- lazy git 
+-- nvim v0.8.0
+ {
+  "kdheepak/lazygit.nvim",
+  cmd = {
+    "LazyGit",
+    "LazyGitConfig",
+    "LazyGitCurrentFile",
+    "LazyGitFilter",
+    "LazyGitFilterCurrentFile",
+  },
+  -- optional for floating window border decoration
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+  },
+  -- setting the keybinding for LazyGit with 'keys' is recommended in
+  -- order to load the plugin when the command is run for the first time
+  keys = {
+    { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+  }
+},
+--
 }
