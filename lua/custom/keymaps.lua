@@ -1,6 +1,15 @@
 vim.keymap.set("i", "jj", "<esc>", { desc = "Normal mode" })
 vim.keymap.set("n", "<leader>qq", ":q!<CR>", { desc = "Exit" })
 
+
+-- go to  beginning and end
+vim.keymap.set("i", "<C-b>", "<ESC>^i", { desc = "Beginning of line" })
+vim.keymap.set("i", "<C-e>", "<End>", { desc = "End of line" })
+vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })
+vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
+vim.keymap.set("i", "<C-j>", "<Down>", { desc = "Move down" })
+vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move up" })
+
 -- terminal keymaps
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>")
 vim.keymap.set("t", "<C-h>", "<C-\\><C-n> <C-h>")
