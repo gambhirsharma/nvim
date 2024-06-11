@@ -680,6 +680,7 @@ require('lazy').setup({
           --   end,
           -- },
           -- vim-react-snippets for luasnip
+          'rafamadriz/friendly-snippets',
           'mlaursen/vim-react-snippets',
         },
       },
