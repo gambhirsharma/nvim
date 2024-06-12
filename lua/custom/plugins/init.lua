@@ -33,19 +33,19 @@ return {
   --autoclose tags
   { 'm4xshen/autoclose.nvim' },
   -- indent blankline
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+  { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
   -- wakatime
-  { 'wakatime/vim-wakatime',               lazy = false },
+  { 'wakatime/vim-wakatime', lazy = false },
   -- discord
   {
-    "andweeb/presence.nvim",
+    'andweeb/presence.nvim',
     enabled = true,
-    event = "VeryLazy",
+    event = 'VeryLazy',
   },
   -- harpoon2
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
     opts = {
       menu = {
         width = vim.api.nvim_win_get_width(0) - 4,
@@ -57,29 +57,29 @@ return {
     keys = function()
       local keys = {
         {
-          "<leader>H",
+          '<leader>H',
           function()
-            require("harpoon"):list():add()
+            require('harpoon'):list():add()
           end,
-          desc = "Harpoon File",
+          desc = 'Harpoon File',
         },
         {
-          "<leader>h",
+          '<leader>h',
           function()
-            local harpoon = require("harpoon")
+            local harpoon = require 'harpoon'
             harpoon.ui:toggle_quick_menu(harpoon:list())
           end,
-          desc = "Harpoon Quick Menu",
+          desc = 'Harpoon Quick Menu',
         },
       }
 
       for i = 1, 5 do
         table.insert(keys, {
-          "<leader>" .. i,
+          '<leader>' .. i,
           function()
-            require("harpoon"):list():select(i)
+            require('harpoon'):list():select(i)
           end,
-          desc = "Harpoon to File " .. i,
+          desc = 'Harpoon to File ' .. i,
         })
       end
       return keys
@@ -97,15 +97,15 @@ return {
   },
   -- hardtime
   {
-    "m4xshen/hardtime.nvim",
-    event = "VeryLazy",
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {}
+    'm4xshen/hardtime.nvim',
+    event = 'VeryLazy',
+    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+    opts = {},
   },
   -- precognition
   {
-    "tris203/precognition.nvim",
-    event = "VeryLazy",
+    'tris203/precognition.nvim',
+    event = 'VeryLazy',
   },
   -- test http requirest
   {
@@ -114,32 +114,61 @@ return {
   -- lazy git
   -- nvim v0.8.0
   {
-    "kdheepak/lazygit.nvim",
+    'kdheepak/lazygit.nvim',
     cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
+      'LazyGit',
+      'LazyGitConfig',
+      'LazyGitCurrentFile',
+      'LazyGitFilter',
+      'LazyGitFilterCurrentFile',
     },
     -- optional for floating window border decoration
     dependencies = {
-      "nvim-lua/plenary.nvim",
+      'nvim-lua/plenary.nvim',
     },
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
+      { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+    },
   },
   -- Todo
   {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-    }
+    },
   },
+  -- nivm-ufo folds
+  {
+    'kevinhwang91/nvim-ufo',
+    dependencies = 'kevinhwang91/promise-async',
+    config = function()
+      vim.o.foldcolumn = '1' -- '0' is not bad
+      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+
+      vim.keymap.set('n', 'zR', require('ufo').openAllFolds, { desc = 'Open all folds' })
+      vim.keymap.set('n', 'zM', require('ufo').closeAllFolds, { desc = 'Close all folds' })
+      vim.keymap.set('n', 'zK', function()
+        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        if not winid then
+          -- choose one of coc.nvim and nvim lsp
+          vim.fn.CocActionAsync 'definitionHover' -- coc.nvim
+          vim.lsp.buf.hover()
+        end
+      end, { desc = 'Peek folded lines under cursor' })
+
+      require('ufo').setup {
+        provider_selector = function(bufnr, filetype, buftype)
+          return { 'treesitter', 'indent' }
+        end,
+      }
+    end,
+  },
+  --
 }
