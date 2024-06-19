@@ -35,7 +35,7 @@ return {
   -- indent blankline
   { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
   -- wakatime
-  { 'wakatime/vim-wakatime', lazy = false },
+  { 'wakatime/vim-wakatime',               lazy = false },
   -- discord
   {
     'andweeb/presence.nvim',
@@ -148,7 +148,7 @@ return {
     dependencies = 'kevinhwang91/promise-async',
     config = function()
       vim.o.foldcolumn = '1' -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
 
@@ -169,6 +169,39 @@ return {
         end,
       }
     end,
+  },
+  --
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+    --   "BufReadPre path/to/my-vault/**.md",
+    --   "BufNewFile path/to/my-vault/**.md",
+    -- },
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- see below for full list of optional dependencies 👇
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "OBSIDIAN",
+          path = "/Users/gambhirsharma/Documents/OBSIDIAN",
+        },
+        {
+          name = "twitter-content",
+          path = "/users/gambhirsharma/Documents/Twitter-content",
+        },
+      },
+      -- see below for full list of options 👇
+    },
   },
   --
 }
