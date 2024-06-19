@@ -103,3 +103,6 @@ ls.add_snippets("javascript", {
   ),
 })
 
+ls.add_snippets("elixir", {
+  s("puts", fmta([[IO.puts("<>")]], {i(1)}))
+})
