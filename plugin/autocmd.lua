@@ -1,0 +1,7 @@
+-- vim.api.nvim_create_autocmd({ "Filetype" }, {
+--   pattern = { "typescript", "typescriptreact" },
+--   callback =
+--       function()
+--         vim.cmd("source ../after/ftplugin/javascript.lua")
+--       end
+-- })
