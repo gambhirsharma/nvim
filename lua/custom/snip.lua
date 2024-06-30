@@ -5,6 +5,7 @@ local extras = require("luasnip.extras")
 local i = ls.insert_node
 local fmta = require("luasnip.extras.fmt").fmta
 local fmt = require("luasnip.extras.fmt").fmt
+local f = ls.function_node
 
 ls.add_snippets("css", {
   s(
@@ -81,13 +82,6 @@ ls.add_snippets("css", {
   ),
 })
 
-ls.add_snippets("markdown", {
-  s("todo", t("- [ ] ")),
-  s("sub", fmt([[<sub>{}</sub>]], { i(1) })),
-  s("sup", fmt([[<sup>{}</sup>]], { i(1) })),
-  s("sqr", fmta([[\sqrt{<>}]], { i(1) })),
-})
-
 ls.add_snippets("javascript", {
   s("clog", fmta([[console.log(`<>`)]], { i(1) })),
   s("cerr", fmta([[console.error(`<>`)]], { i(1) })),
@@ -95,7 +89,7 @@ ls.add_snippets("javascript", {
   s(
     "cfun",
     fmt(
-      [[const {} = () => {{ 
+      [[const {} = () => {{
     {}
     }}]],
       { i(1), i(0) }
@@ -103,6 +97,29 @@ ls.add_snippets("javascript", {
   ),
 })
 
+ls.add_snippets("markdown", {
+    s("todo", t("- [ ] ")),
+    s("sub", fmt([[<sub>{}</sub>]], { i(1) })),
+    s("sup", fmt([[<sup>{}</sup>]], { i(1) })),
+    s("sqr", fmta([[\sqrt{<>}]], { i(1) })),
+})
+
+
+
 ls.add_snippets("elixir", {
-  s("puts", fmta([[IO.puts("<>")]], {i(1)}))
+  s("puts", fmta([[IO.puts("<>")]], { i(1) }))
+})
+
+ls.add_snippets('http', {
+  s("get", fmta([[
+  GET <> HTTP/1.0
+  accept: application/json
+    ]],
+    { i(1) }
+  )),
+  s('post', fmta([[
+  POST <>
+  accept: application/json
+  content-type: application/json
+ ]], { i(1) })),
 })

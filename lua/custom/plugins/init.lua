@@ -3,110 +3,28 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  -- neotree
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x',
-    cmd = 'Neotree',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-      'MunifTanjim/nui.nvim',
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    },
-    keys = {
-      {
-        '<leader>fe',
-        function()
-          require('neo-tree.command').execute { toggle = true, dir = vim.uv.cwd() }
-        end,
-        desc = 'Explorer NeoTree (cwd)',
-      },
-      { '<leader>e', '<leader>fe', desc = 'Explorer NeoTree (root dir)', remap = true },
-    },
-    opts = {
-      window = {
-        position = 'right',
-      },
-    },
-  },
   --autoclose tags
   { 'm4xshen/autoclose.nvim' },
-  -- indent blankline
-  { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
   -- wakatime
-  { 'wakatime/vim-wakatime',               lazy = false },
+  { 'wakatime/vim-wakatime', lazy = false },
   -- discord
   {
     'andweeb/presence.nvim',
     enabled = true,
     event = 'VeryLazy',
   },
-  -- harpoon2
-  {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    opts = {
-      menu = {
-        width = vim.api.nvim_win_get_width(0) - 4,
-      },
-      settings = {
-        save_on_toggle = true,
-      },
-    },
-    keys = function()
-      local keys = {
-        {
-          '<leader>H',
-          function()
-            require('harpoon'):list():add()
-          end,
-          desc = 'Harpoon File',
-        },
-        {
-          '<leader>h',
-          function()
-            local harpoon = require 'harpoon'
-            harpoon.ui:toggle_quick_menu(harpoon:list())
-          end,
-          desc = 'Harpoon Quick Menu',
-        },
-      }
-
-      for i = 1, 5 do
-        table.insert(keys, {
-          '<leader>' .. i,
-          function()
-            require('harpoon'):list():select(i)
-          end,
-          desc = 'Harpoon to File ' .. i,
-        })
-      end
-      return keys
-    end,
-  },
-
-  -- wilder
-  {
-    'gelguy/wilder.nvim',
-    event = 'VeryLazy',
-    config = function()
-      local wilder = require 'wilder'
-      wilder.setup { modes = { ':', '/', '?' } }
-    end,
-  },
   -- hardtime
-  {
-    'm4xshen/hardtime.nvim',
-    event = 'VeryLazy',
-    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
-    opts = {},
-  },
+  -- {
+  --   'm4xshen/hardtime.nvim',
+  --   event = 'VeryLazy',
+  --   dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+  --   opts = {},
+  -- },
   -- precognition
-  {
-    'tris203/precognition.nvim',
-    event = 'VeryLazy',
-  },
+  -- {
+  --   'tris203/precognition.nvim',
+  --   event = 'VeryLazy',
+  -- },
   -- test http requirest
   {
     'diepm/vim-rest-console',
@@ -132,76 +50,34 @@ return {
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
   },
-  -- Todo
+  -- Kulala (HTTP)
+  { 'mistweaverco/kulala.nvim' },
+  -- markdownPreview
   {
-    'folke/todo-comments.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
-  },
-  -- nivm-ufo folds
-  {
-    'kevinhwang91/nvim-ufo',
-    dependencies = 'kevinhwang91/promise-async',
-    config = function()
-      vim.o.foldcolumn = '1' -- '0' is not bad
-      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-
-      vim.keymap.set('n', 'zR', require('ufo').openAllFolds, { desc = 'Open all folds' })
-      vim.keymap.set('n', 'zM', require('ufo').closeAllFolds, { desc = 'Close all folds' })
-      vim.keymap.set('n', 'zK', function()
-        local winid = require('ufo').peekFoldedLinesUnderCursor()
-        if not winid then
-          -- choose one of coc.nvim and nvim lsp
-          vim.fn.CocActionAsync 'definitionHover' -- coc.nvim
-          vim.lsp.buf.hover()
-        end
-      end, { desc = 'Peek folded lines under cursor' })
-
-      require('ufo').setup {
-        provider_selector = function(bufnr, filetype, buftype)
-          return { 'treesitter', 'indent' }
-        end,
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+      vim.g.mkdp_theme = "dark"
+      vim.g.mkdp_refresh_slow = 1
+      vim.g.mkdp_open_to_the_world = 1
+      vim.g.mkdp_open_ip = "127.0.0.1"
+      vim.g.mkdp_echo_preview_url = 1
+      vim.g.mkdp_port = "7777"
+      vim.g.mkdp_browser = '/Applications/Safari.app'
+      vim.g.mkdp_preview_options = {
+        mkit = {},
+        katex = {},
+        uml = { server = "http://localhost:7777" },
+        disable_sync_scroll = 0,
+        sync_scroll_type = "middle",
+        hide_yaml_meta = 1,
+        sequence_diagrams = {},
+        flowchart_diagrams = {},
+        content_editable = false,
       }
     end,
-  },
-  --
-  {
-    "epwalsh/obsidian.nvim",
-    version = "*", -- recommended, use latest release instead of latest commit
-    lazy = true,
-    ft = "markdown",
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-    --   "BufReadPre path/to/my-vault/**.md",
-    --   "BufNewFile path/to/my-vault/**.md",
-    -- },
-    dependencies = {
-      -- Required.
-      "nvim-lua/plenary.nvim",
-
-      -- see below for full list of optional dependencies 👇
-    },
-    opts = {
-      workspaces = {
-        {
-          name = "OBSIDIAN",
-          path = "/Users/gambhirsharma/Documents/OBSIDIAN",
-        },
-        {
-          name = "twitter-content",
-          path = "/users/gambhirsharma/Documents/Twitter-content",
-        },
-      },
-      -- see below for full list of options 👇
-    },
-  },
-  --
+    ft = { "markdown" },
+  }
 }
