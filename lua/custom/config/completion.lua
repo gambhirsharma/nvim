@@ -8,8 +8,6 @@ luasnip.filetype_extend('javascriptreact', { 'javascript' })
 luasnip.filetype_extend('vue', { 'javascript' })
 
 require('luasnip.loaders.from_vscode').lazy_load()
-require 'custom.snip'
-import = 'after/ftplugin/'
 require('vim-react-snippets').lazy_load()
 
 luasnip.config.setup {}
