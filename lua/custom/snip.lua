@@ -89,10 +89,10 @@ ls.add_snippets("javascript", {
   s(
     "cfun",
     fmt(
-      [[const {} = () => {{
+      [[const {} = ({}) => {{
     {}
     }}]],
-      { i(1), i(0) }
+      { i(1),i(2), i(0) }
     )
   ),
 })
