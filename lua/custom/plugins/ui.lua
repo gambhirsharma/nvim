@@ -34,7 +34,21 @@ return {
         cmd = 'Neotree',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+            {
+                'nvim-tree/nvim-web-devicons',
+                config = function()
+                    require("nvim-web-devicons").setup({
+                        strict = true,
+                        override_by_extension = {
+                            astro = {
+                                icon = "",
+                                color = "#EF8547",
+                                name = "astro",
+                            },
+                        },
+                    })
+                end
+            },
             'MunifTanjim/nui.nvim',
             -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
         },
