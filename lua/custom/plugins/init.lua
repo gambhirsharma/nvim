@@ -7,6 +7,13 @@ return {
   { 'm4xshen/autoclose.nvim' },
   -- wakatime
   { 'wakatime/vim-wakatime', lazy = false },
+  -- comment
+  {
+    "folke/ts-comments.nvim",
+    opts = {},
+    -- event = "VeryLazy",
+    -- enabled = vim.fn.has("nvim-0.10.0") == 1,
+  },
   -- discord
   {
     'andweeb/presence.nvim',
@@ -65,7 +72,7 @@ return {
       vim.g.mkdp_open_ip = "127.0.0.1"
       vim.g.mkdp_echo_preview_url = 1
       vim.g.mkdp_port = "7777"
-      vim.g.mkdp_browser = '/Applications/Safari.app'
+      -- vim.g.mkdp_browser = '/Applications/Safari.app'
       vim.g.mkdp_preview_options = {
         mkit = {},
         katex = {},
