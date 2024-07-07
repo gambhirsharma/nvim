@@ -21,8 +21,18 @@ require("luasnip.loaders.from_lua").load({ paths = "~/.config/kickstart/snippets
 
 require('lspsaga').setup({})
 
-local lspkind = require "lspkind"
-lspkind.init {}
+-- local lspkind = require "lspkind"
+-- lspkind.init({
+--   mode = 'symbol',
+-- })
+
+require("sg").setup({
+  enable_cody = true,
+  accept_tos = true,
+  event = "InsertEnter",
+  -- event = "TextChangedI",
+})
+
 
 cmp.setup {
   snippet = {
@@ -36,10 +46,13 @@ cmp.setup {
   },
   formatting = {
     format = require("lspkind").cmp_format({
-      mode = 'symbol',
+      mode = 'symbol_text',
       maxwidth = 50,
       ellipsis_char = '...',
       show_labelDetails = true,
+      symbol_map = {
+        Cody = "🤖",
+      }
     })
   },
   completion = { completeopt = 'menu,menuone,noinsert' },
@@ -65,7 +78,9 @@ cmp.setup {
 
     -- If you prefer more traditional completion keymaps,
     -- you can uncomment the following lines
-    ['<CR>'] = cmp.mapping.confirm { select = true },
+    -- ['<CR>'] = cmp.mapping.confirm { select = true },
+    ['<tab>'] = cmp.mapping.confirm { select = true },
+    -- ['<C-y>'] = cmp.mapping.confirm { select = true },
     --['<Tab>'] = cmp.mapping.select_next_item(),
     --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
@@ -82,7 +97,8 @@ cmp.setup {
     --
     -- <c-l> will move you to the right of each of the expansion locations.
     -- <c-h> is similar, except moving you backwards.
-    ['<tab>'] = cmp.mapping(function()
+    -- ['<tab>']
+    ['<C-y>'] = cmp.mapping(function()
       if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       end
@@ -98,8 +114,9 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    { { name = "buffer" } },
+    { name = 'cody' },
     { name = 'luasnip' },
+    { name = "buffer" },
     { name = 'path' },
   },
 }
