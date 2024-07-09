@@ -38,7 +38,14 @@ return {
                 'nvim-tree/nvim-web-devicons',
                 config = function()
                     require("nvim-web-devicons").setup({
-                        strict = true,
+                        -- strict = true,
+                        override = {
+                            ["serverless.yml"] = {
+                                icon = '󰘧',
+                                color = '#FFAC45', -- Optional: set a custom color for the icon
+                                name = 'ServerlessYml'
+                            }
+                        },
                         override_by_extension = {
                             astro = {
                                 icon = "",
@@ -46,6 +53,7 @@ return {
                                 name = "astro",
                             },
                         },
+                        default = true,
                     })
                 end
             },
