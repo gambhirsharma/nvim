@@ -1,6 +1,8 @@
 vim.keymap.set("i", "jj", "<esc>", { desc = "Normal mode" })
 vim.keymap.set("n", "<leader>qq", ":q!<CR>", { desc = "Exit" })
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Copy to registery" })
+vim.keymap.set({ "n","v", }, "<A-i>", ':ToggleTerm direction=float<CR>', { desc = "Toggle Terminal Float" })
+vim.keymap.set("t", "<A-i>", [[<C-\><C-n>:ToggleTerm direction=float<CR>]], { desc = "Toggle Terminal Float" })
 
 -- go to  beginning and end
 vim.keymap.set("i", "<C-b>", "<ESC>^i", { desc = "Beginning of line" })
@@ -18,6 +20,7 @@ vim.keymap.set("v", "<leader>ce", "<cmd>CodyExplain<CR>", { desc = "[C]ody [E]xp
 
 
 -- vim.keymap.set("n", "<leader>cd", ":CodyTask<Space>", {desc = "Cody Task", remap = true})
+
 -- windows
 vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other Window", remap = true })
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
@@ -58,4 +61,6 @@ vim.keymap.set("v", "J", ":move '>+1<CR>gv=gv", { desc = "Move selection down" }
 
 -- Notes
 vim.keymap.set('n', "<leader>nt", "<cmd>Telescope find_files cwd=~/Documents/Notes<CR>", { desc = "Notes" })
+
+
 -- diganostics
