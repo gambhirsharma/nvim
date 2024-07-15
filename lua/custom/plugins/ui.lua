@@ -41,8 +41,8 @@ return {
                         -- strict = true,
                         override = {
                             ["serverless.yml"] = {
-                                icon = '󰘧',
-                                color = '#FFAC45', -- Optional: set a custom color for the icon
+                                icon = 'ϟ',
+                                color = '#FD5750', -- Optional: set a custom color for the icon
                                 name = 'ServerlessYml'
                             }
                         },
@@ -101,4 +101,5 @@ return {
     },
     -- Toggle Term
     { 'akinsho/toggleterm.nvim', version = "*", opts = { --[[ things you want to change go here]] },},
+
 }
