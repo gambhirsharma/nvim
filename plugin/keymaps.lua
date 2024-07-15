@@ -1,5 +1,6 @@
 vim.keymap.set("i", "jj", "<esc>", { desc = "Normal mode" })
 vim.keymap.set("n", "<leader>qq", ":q!<CR>", { desc = "Exit" })
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Copy to registery" })
 
 -- go to  beginning and end
 vim.keymap.set("i", "<C-b>", "<ESC>^i", { desc = "Beginning of line" })
@@ -57,3 +58,4 @@ vim.keymap.set("v", "J", ":move '>+1<CR>gv=gv", { desc = "Move selection down" }
 
 -- Notes
 vim.keymap.set('n', "<leader>nt", "<cmd>Telescope find_files cwd=~/Documents/Notes<CR>", { desc = "Notes" })
+-- diganostics
