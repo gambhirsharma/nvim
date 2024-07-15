@@ -95,6 +95,10 @@ return {
             -- refer to the configuration section below
         },
     },
+    -- undo tree
+    {
+        'mbbill/undotree'
+    },
     -- Toggle Term
     { 'akinsho/toggleterm.nvim', version = "*", opts = { --[[ things you want to change go here]] },},
 }
