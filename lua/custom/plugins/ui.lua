@@ -49,7 +49,7 @@ return {
                         override_by_extension = {
                             astro = {
                                 icon = "",
-                                color = "#EF8547",
+                                color = "#E23AAF",
                                 name = "astro",
                             },
                         },
