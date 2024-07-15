@@ -9,7 +9,14 @@ vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
 vim.keymap.set("i", "<C-j>", "<Down>", { desc = "Move down" })
 vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move up" })
 
+-- Cody Chat
+vim.keymap.set("n", "<leader>cc", "<cmd>CodyChat<CR>", { desc = "[C]ody [C]hat", remap = true })
+vim.keymap.set("n", "<leader>ct", "<cmd>CodyToggle<CR>", { desc = "[C]ody [T]oggle", remap = true })
+vim.keymap.set("v", "<leader>ct", "<cmd>CodyTask<CR>", { desc = "[C]ody [T]ask", remap = true })
+vim.keymap.set("v", "<leader>ce", "<cmd>CodyExplain<CR>", { desc = "[C]ody [E]xplain", remap = true })
 
+
+-- vim.keymap.set("n", "<leader>cd", ":CodyTask<Space>", {desc = "Cody Task", remap = true})
 -- windows
 vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other Window", remap = true })
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
@@ -47,10 +54,6 @@ vim.keymap.set("n", "<leader>th", ":Telescope colorscheme<CR>", { desc = "color 
 vim.keymap.set("v", "K", ":move '<-2<CR>gv=gv", { desc = "Move selection up" })
 vim.keymap.set("v", "J", ":move '>+1<CR>gv=gv", { desc = "Move selection down" })
 
--- Cody Chat
-vim.keymap.set("n", "<leader>cs", "<cmd>CodyChat<CR>", { desc = "Cody Chat", remap = ture })
-vim.keymap.set("n", "<leader>ct", "<cmd>CodyToggle<CR>", { desc = "Cody Toggle", remap = ture })
--- vim.keymap.set("n", "<leader>cd", ":CodyTask<Space>", {desc = "Cody Task", remap = ture})
 
 -- Notes
 vim.keymap.set('n', "<leader>nt", "<cmd>Telescope find_files cwd=~/Documents/Notes<CR>", { desc = "Notes" })
