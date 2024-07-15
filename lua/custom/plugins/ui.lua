@@ -95,4 +95,6 @@ return {
             -- refer to the configuration section below
         },
     },
+    -- Toggle Term
+    { 'akinsho/toggleterm.nvim', version = "*", opts = { --[[ things you want to change go here]] },},
 }
