@@ -21,12 +21,6 @@ return {
           border = "rounded" -- Use "single", "double", "rounded", "solid", or "shadow"
         }
       )
-      -- disable line diagnostics
-      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = false
-        }
-      )
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -148,8 +142,7 @@ return {
       local servers = {
         elixirls = {},
         -- clangd = {},
-        -- gopls = {},
-        yamlls = {},
+        gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs

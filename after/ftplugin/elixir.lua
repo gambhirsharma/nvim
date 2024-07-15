@@ -1,7 +1,0 @@
--- local ls = require("luasnip")
--- local s = ls.snippet
--- local fmta = require("luasnip.extras.fmt").fmta
---
--- ls.add_snippets("elixir", {
---   s("puts", fmta([[IO.puts("<>")]], { i(1) }))
--- })
