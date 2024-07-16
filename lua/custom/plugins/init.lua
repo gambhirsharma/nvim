@@ -58,7 +58,12 @@ return {
     },
   },
   -- Kulala (HTTP)
-  { 'mistweaverco/kulala.nvim' },
+  {
+    'mistweaverco/kulala.nvim',
+    config = function()
+      require('kulala').setup()
+    end
+  },
   -- markdownPreview
   {
     "iamcco/markdown-preview.nvim",
