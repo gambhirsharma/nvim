@@ -33,9 +33,9 @@ return {
   --   event = 'VeryLazy',
   -- },
   -- test http requirest
-  {
-    'diepm/vim-rest-console',
-  },
+  -- {
+  --   'diepm/vim-rest-console',
+  -- },
   -- lazy git
   -- nvim v0.8.0
   {
@@ -58,11 +58,28 @@ return {
     },
   },
   -- Kulala (HTTP)
+  -- {
+  --   'mistweaverco/kulala.nvim',
+  --   config = function()
+  --     require('kulala').setup()
+  --   end
+  -- },
+  -- REST.nvim
   {
-    'mistweaverco/kulala.nvim',
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+    opts = {
+      rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
+    }
+  },
+  {
+    "rest-nvim/rest.nvim",
+    ft = "http",
+    dependencies = { "luarocks.nvim" },
     config = function()
-      require('kulala').setup()
-    end
+      require("rest-nvim").setup()
+    end,
   },
   -- markdownPreview
   {
