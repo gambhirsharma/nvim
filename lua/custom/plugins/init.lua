@@ -108,5 +108,7 @@ return {
       }
     end,
     ft = { "markdown" },
-  }
+  },
+  -- del buffer
+  {'ojroques/nvim-bufdel'},
 }
