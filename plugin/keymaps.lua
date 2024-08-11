@@ -26,7 +26,7 @@ vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other Window", remap = tru
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap = true })
 vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
-vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
+-- vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 vim.keymap.set("n", "<leader>|", "<c-w>v", { desc = "split Window Right", remap = true })
 
 -- windows resize
