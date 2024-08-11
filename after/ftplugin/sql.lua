@@ -7,7 +7,7 @@
 -- call db_ui#utils#set_mapping('<Leader>S', '<Plug>(DBUI_ExecuteQuery)')
 -- call db_ui#utils#set_mapping('<Leader>S', '<Plug>(DBUI_ExecuteQuery)', 'v')
 
--- Check if 'db_ui_disable_mappings' is set and return if it is not zero
+--Check if 'db_ui_disable_mappings' is set and return if it is not zero
 if vim.g.db_ui_disable_mappings == nil then
   vim.g.db_ui_disable_mappings = 0
 end

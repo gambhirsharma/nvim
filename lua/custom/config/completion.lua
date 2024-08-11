@@ -6,9 +6,8 @@ luasnip.filetype_extend('typescript', { 'javascript' })
 luasnip.filetype_extend('typescriptreact', { 'javascript' })
 luasnip.filetype_extend('javascriptreact', { 'javascript' })
 luasnip.filetype_extend('vue', { 'javascript' })
+luasnip.filetype_extend('scss', { 'css' })
 
-require('luasnip.loaders.from_vscode').lazy_load()
-require('vim-react-snippets').lazy_load()
 
 luasnip.config.setup {}
 luasnip.config.set_config {
@@ -16,8 +15,15 @@ luasnip.config.set_config {
   updateevents = "TextChanged, TextChangedI",
   enable_autosnippets = true,
 }
-require("luasnip.loaders.from_lua").load({ paths = "~/.config/kickstart/snippets" })
 
+require("luasnip.loaders.from_lua").load({
+  paths = "~/.config/kickstart/snippets",
+  default_priority = 2000,
+  override_priority = 2000,
+})
+
+require('luasnip.loaders.from_vscode').lazy_load()
+require('vim-react-snippets').lazy_load()
 
 require('lspsaga').setup({})
 
@@ -78,9 +84,9 @@ cmp.setup {
 
     -- If you prefer more traditional completion keymaps,
     -- you can uncomment the following lines
-    -- ['<CR>'] = cmp.mapping.confirm { select = true },
-    ['<tab>'] = cmp.mapping.confirm { select = true },
-    -- ['<C-y>'] = cmp.mapping.confirm { select = true },
+    -- ['<C-CR>'] = cmp.mapping.confirm { select = true },
+    -- ['<tab>'] = cmp.mapping.confirm { select = true },
+    ['<C-y>'] = cmp.mapping.confirm { select = true },
     --['<Tab>'] = cmp.mapping.select_next_item(),
     --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
@@ -98,7 +104,7 @@ cmp.setup {
     -- <c-l> will move you to the right of each of the expansion locations.
     -- <c-h> is similar, except moving you backwards.
     -- ['<tab>']
-    ['<C-y>'] = cmp.mapping(function()
+    ['<tab>'] = cmp.mapping(function()
       if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       end
