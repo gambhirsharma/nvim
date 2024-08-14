@@ -88,6 +88,7 @@ return {
     -- Todo
     {
         'folke/todo-comments.nvim',
+            event = "VeryLazy",
         dependencies = { 'nvim-lua/plenary.nvim' },
         opts = {
             -- your configuration comes here
@@ -100,10 +101,16 @@ return {
         'mbbill/undotree'
     },
     -- Toggle Term
-    { 'akinsho/toggleterm.nvim', version = "*", opts = { --[[ things you want to change go here]] }, },
+    {
+        'akinsho/toggleterm.nvim',
+        event = "VeryLazy",
+        version = "*",
+        opts = { --[[ things you want to change go here]] },
+    },
     -- oil.nvim
     {
         "stevearc/oil.nvim",
+        event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             require("oil").setup {

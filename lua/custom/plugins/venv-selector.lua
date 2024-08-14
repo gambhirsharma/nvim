@@ -1,5 +1,6 @@
-return{
+return {
   "linux-cultist/venv-selector.nvim",
+  event = "VeryLazy",
   branch = "regexp", -- Use this branch for the new version
   cmd = "VenvSelect",
   -- enabled = function()

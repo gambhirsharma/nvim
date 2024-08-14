@@ -1,8 +1,8 @@
 return
 {
   "epwalsh/obsidian.nvim",
-  version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
+  version = "*", -- recommended, use latest release instead of latest commit
   -- ft = "markdown",
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
   event = {
@@ -14,6 +14,7 @@ return
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
+      lazy= true,
 
     -- see below for full list of optional dependencies 👇
   },

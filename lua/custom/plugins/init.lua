@@ -10,6 +10,7 @@ return {
   -- comment
   {
     "folke/ts-comments.nvim",
+    lazy = true,
     opts = {},
     -- event = "VeryLazy",
     -- enabled = vim.fn.has("nvim-0.10.0") == 1,
@@ -40,6 +41,8 @@ return {
   -- nvim v0.8.0
   {
     'kdheepak/lazygit.nvim',
+    event = "VeryLazy",
+
     cmd = {
       'LazyGit',
       'LazyGitConfig',
@@ -67,7 +70,10 @@ return {
   -- REST.nvim
   {
     "vhyrro/luarocks.nvim",
-    priority = 1000,
+    -- lazy = true,
+    event = "VeryLazy",
+
+    -- priority = 1000,
     config = true,
     opts = {
       rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
@@ -75,6 +81,8 @@ return {
   },
   {
     "rest-nvim/rest.nvim",
+    event = "VeryLazy",
+
     ft = "http",
     dependencies = { "luarocks.nvim" },
     config = function()
@@ -84,6 +92,7 @@ return {
   -- markdownPreview
   {
     "iamcco/markdown-preview.nvim",
+    event = "VeryLazy",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = "cd app && yarn install",
     init = function()
@@ -110,5 +119,6 @@ return {
     ft = { "markdown" },
   },
   -- del buffer
-  {'ojroques/nvim-bufdel'},
+  { 'ojroques/nvim-bufdel', event = "VeryLazy",
+  },
 }
