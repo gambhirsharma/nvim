@@ -1,8 +1,14 @@
 return {
-  'tpope/vim-dadbod',
-  'kristijanhusak/vim-dadbod-completion',
+  {
+    'tpope/vim-dadbod', event = 'InsertEnter',
+  },
+  {
+    'kristijanhusak/vim-dadbod-completion',
+    event = 'InsertEnter',
+  },
   {
     'kristijanhusak/vim-dadbod-ui',
+    event = 'InsertEnter',
     init = function()
       local data_path = vim.fn.stdpath("data")
 
