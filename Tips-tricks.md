@@ -14,3 +14,10 @@
 ```
 
 > `copen` is used to open quick fix list
+
+---
+- `ZZ` & `ZQ` to exit vim
+- Select within () and {} with `vib` / `viB`
+- Highlight last highlighted - `gv`
+- `A` to append
+- 
