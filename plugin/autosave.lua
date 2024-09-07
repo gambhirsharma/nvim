@@ -1,4 +1,4 @@
-_G.autosave_enabled = true
+_G.autosave_enabled = false
 
 local function clear_cmdarea()
   vim.defer_fn(function()
