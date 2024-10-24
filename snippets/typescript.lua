@@ -23,4 +23,10 @@ return {
   ),
   
   s("impfd", fmta([[import <> from "<>"]], { i(0), i(1) })),
+  s("tfce", fmt(
+    [[
+    interface 
+    const {}: = ()
+    ]]
+  ))
 }

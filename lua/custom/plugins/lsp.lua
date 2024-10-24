@@ -158,12 +158,13 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
+        ts_ls = {},
         -- vuels = {},
-        volar = {}, -- lsp for vue.js
+        -- volar = {}, -- lsp for vue.js
         tailwindcss = {},
         cssls = {},
         astro = {},
+
         --
         -- swiftlint = {},
         lua_ls = {

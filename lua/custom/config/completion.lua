@@ -4,8 +4,7 @@ local luasnip = require 'luasnip'
 -- luasnip extends
 luasnip.filetype_extend('typescript', { 'javascript' })
 luasnip.filetype_extend('typescriptreact', { 'javascript' })
-luasnip.filetype_extend('javascriptreact', { 'javascript' })
-luasnip.filetype_extend('vue', { 'javascript' })
+luasnip.filetype_extend('javascriptreact', { 'javascript' }) luasnip.filetype_extend('vue', { 'javascript' })
 luasnip.filetype_extend('scss', { 'css' })
 
 
@@ -32,12 +31,14 @@ require('lspsaga').setup({})
 --   mode = 'symbol',
 -- })
 
-require("sg").setup({
-  enable_cody = true,
-  accept_tos = true,
-  event = "InsertEnter",
-  -- event = "TextChangedI",
-})
+-- TODO: Sourcegraph
+--
+-- require("sg").setup({
+--   enable_cody = true,
+--   accept_tos = true,
+--   event = "InsertEnter",
+--   -- event = "TextChangedI",
+-- })
 
 
 cmp.setup {
@@ -50,17 +51,17 @@ cmp.setup {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  formatting = {
-    format = require("lspkind").cmp_format({
-      mode = 'symbol_text',
-      maxwidth = 50,
-      ellipsis_char = '...',
-      show_labelDetails = true,
-      symbol_map = {
-        Cody = "🤖",
-      }
-    })
-  },
+  -- formatting = {
+  --   format = require("lspkind").cmp_format({
+  --     mode = 'symbol_text',
+  --     maxwidth = 50,
+  --     ellipsis_char = '...',
+  --     show_labelDetails = true,
+  --     symbol_map = {
+  --       Cody = "🤖",
+  --     }
+  --   })
+  -- },
   completion = { completeopt = 'menu,menuone,noinsert' },
 
   -- For an understanding of why these mappings were
@@ -104,12 +105,13 @@ cmp.setup {
     -- <c-l> will move you to the right of each of the expansion locations.
     -- <c-h> is similar, except moving you backwards.
     -- ['<tab>']
-    ['<tab>'] = cmp.mapping(function()
+    --
+    ['<C-o>'] = cmp.mapping(function()
       if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       end
     end, { 'i', 's' }),
-    ['<S-tab>'] = cmp.mapping(function()
+    ['<C-q>'] = cmp.mapping(function()
       if luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       end
@@ -120,6 +122,8 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
+    -- TODO: Sourcegraph
+    --
     { name = 'cody' },
     { name = 'luasnip' },
     { name = "buffer" },

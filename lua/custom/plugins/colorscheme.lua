@@ -10,7 +10,7 @@ return {
     priority = 1000, -- Make sure to load this before all the other start plugins.
     -- transparent
     opts = {
-      transparent = true,
+      transparent = false,
       styles = {
         sidebars = "transparent",
         floats = "transparent",
@@ -66,7 +66,7 @@ return {
   {
     'olivercederborg/poimandres.nvim',
 --    lazy = false,
- --   priority = 1000,
+    priority = 1000,
     config = function()
       require('poimandres').setup {
         -- leave this setup function empty for default config
