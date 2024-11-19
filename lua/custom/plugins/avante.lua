@@ -8,9 +8,25 @@ return {
   opts = {
     -- add any opts here
    provider = "copilot",
+    windows = {
+      input = {
+        height = 8,
+      }
+    }
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
+
+  -- config = function()
+  --   require("avante").setup({
+  --     windows = {
+  --       input = {
+  --         height = 1,
+  --       }
+  --     }
+  --   })
+  -- end,
+
   -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
