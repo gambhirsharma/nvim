@@ -53,6 +53,15 @@ return {
     name = 'everforest',
     --   priority = 1000
   },
+  {
+    'datsfilipe/vesper.nvim', 
+    name = 'vesper',
+    init = function()
+      -- vim.cmd.colorscheme 'vesper'
+    end
+
+  },
+
   -- Lua
   {
     'tjdevries/colorbuddy.nvim',
@@ -65,17 +74,17 @@ return {
   },
   {
     'olivercederborg/poimandres.nvim',
---    lazy = false,
+    --    lazy = false,
     priority = 1000,
     config = function()
       require('poimandres').setup {
         -- leave this setup function empty for default config
         -- or refer to the configuration section
-        bold_vert_split = false,    -- use bold vertical separators
-        dim_nc_background = false,  -- dim 'non-current' window backgrounds
-        disable_background = false, -- disable background
+        bold_vert_split = false,          -- use bold vertical separators
+        dim_nc_background = false,        -- dim 'non-current' window backgrounds
+        disable_background = false,       -- disable background
         disable_float_background = false, -- disable background for floats
-        disable_italics = false,    -- disable italics     -- for configuration options
+        disable_italics = false,          -- disable italics     -- for configuration options
       }
     end,
 
@@ -83,5 +92,10 @@ return {
     init = function()
       -- vim.cmd("colorscheme poimandres")
     end
-  }
+  }, {
+  -- dir = '~/coding/NeoVim-Plugins-dev/appwrite.nvim/',
+  -- init = function()
+  --   vim.cmd.colorscheme 'appwrite'
+  -- end,
+}
 }
