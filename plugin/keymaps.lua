@@ -13,10 +13,10 @@ vim.keymap.set("i", "<C-j>", "<Down>", { desc = "Move down" })
 vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move up" })
 
 -- Cody Chat
-vim.keymap.set("n", "<leader>cc", "<cmd>CodyChat<CR>", { desc = "[C]ody [C]hat", remap = true })
-vim.keymap.set("n", "<leader>ct", "<cmd>CodyToggle<CR>", { desc = "[C]ody [T]oggle", remap = true })
-vim.keymap.set("v", "<leader>ct", "<cmd>CodyTask<CR>", { desc = "[C]ody [T]ask", remap = true })
-vim.keymap.set("v", "<leader>ce", "<cmd>CodyExplain<CR>", { desc = "[C]ody [E]xplain", remap = true })
+-- vim.keymap.set("n", "<leader>cc", "<cmd>CodyChat<CR>", { desc = "[C]ody [C]hat", remap = true })
+-- vim.keymap.set("n", "<leader>ct", "<cmd>CodyToggle<CR>", { desc = "[C]ody [T]oggle", remap = true })
+-- vim.keymap.set("v", "<leader>ct", "<cmd>CodyTask<CR>", { desc = "[C]ody [T]ask", remap = true })
+-- vim.keymap.set("v", "<leader>ce", "<cmd>CodyExplain<CR>", { desc = "[C]ody [E]xplain", remap = true })
 
 
 -- vim.keymap.set("n", "<leader>cd", ":CodyTask<Space>", {desc = "Cody Task", remap = true})
