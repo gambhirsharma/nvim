@@ -3,8 +3,10 @@ local luasnip = require 'luasnip'
 
 -- luasnip extends
 luasnip.filetype_extend('typescript', { 'javascript' })
+luasnip.filetype_extend('typescriptreact', { 'typescript' })
 luasnip.filetype_extend('typescriptreact', { 'javascript' })
-luasnip.filetype_extend('javascriptreact', { 'javascript' }) luasnip.filetype_extend('vue', { 'javascript' })
+luasnip.filetype_extend('javascriptreact', { 'javascript' })
+luasnip.filetype_extend('vue', { 'javascript' })
 luasnip.filetype_extend('scss', { 'css' })
 
 

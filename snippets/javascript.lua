@@ -2,7 +2,7 @@ return {
   s("clog", fmta([[console.log(`<>`)]], { i(1) })),
   s("cerr", fmta([[console.error(`<>`)]], { i(1) })),
   -- s("impf", fmta([[import {<>} from "<>"]], { i(0), i(1) })),
-  s("impf", fmta([[immmmp {<>} from "<>"]], { i(0), i(1) })),
+  s("impf", fmta([[import {<>} from "<>"]], { i(0), i(1) })),
   s(
     "cfun",
     fmt(
