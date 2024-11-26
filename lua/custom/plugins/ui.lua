@@ -88,7 +88,7 @@ return {
     -- Todo
     {
         'folke/todo-comments.nvim',
-            event = "VeryLazy",
+        event = "VeryLazy",
         dependencies = { 'nvim-lua/plenary.nvim' },
         opts = {
             -- your configuration comes here
@@ -133,5 +133,10 @@ return {
             -- Open parent directory in floating window
             vim.keymap.set("n", "<space>-", require("oil").toggle_float)
         end,
+    },
+    -- file diff
+    {
+        "sindrets/diffview.nvim",
+        event = "VeryLazy",
     },
 }
