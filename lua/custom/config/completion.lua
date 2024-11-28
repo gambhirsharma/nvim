@@ -108,12 +108,12 @@ cmp.setup {
     -- <c-h> is similar, except moving you backwards.
     -- ['<tab>']
     --
-    ['<Tab>'] = cmp.mapping(function()
+    ['<C-o>'] = cmp.mapping(function()
       if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       end
     end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function()
+    ['<C-i>'] = cmp.mapping(function()
       if luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       end
