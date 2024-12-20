@@ -23,7 +23,7 @@ return
     workspaces = {
       {
         name = "OBSIDIAN",
-        path = "/Users/gambhirsharma/Documents/OBSIDIAN",
+        path = "/Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita'degliStudidiRomaTorVergata/OBSIDIAN",
       },
       -- {
       --   name = "twitter-content",
