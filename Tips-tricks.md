@@ -31,4 +31,3 @@
 
 ---
 `:%! xxd` view the file in hex binary form
-
