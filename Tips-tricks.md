@@ -28,3 +28,6 @@
 ---
 ** Terminal Shortcut ** 
 [Tips - 13 Linux Terminal Shortcuts Every Power Linux User Must Know](https://linuxhandbook.com/linux-shortcuts/)
+
+---
+`:%! xxd` view the file in hex binary form
