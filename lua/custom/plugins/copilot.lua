@@ -1,7 +1,7 @@
-return {
-  -- FIX: make lazy load
-  "github/copilot.vim"
-}
+return {}
+-- {
+--   "github/copilot.vim"
+-- }
 --
 -- return {}
 -- {
