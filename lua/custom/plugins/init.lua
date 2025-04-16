@@ -18,7 +18,7 @@ return {
   -- discord
   {
     'andweeb/presence.nvim',
-    enabled = true,
+    enabled = false,
     event = 'VeryLazy',
   },
   -- hardtime
@@ -60,6 +60,7 @@ return {
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
   },
+
   -- Kulala (HTTP)
   -- {
   --   'mistweaverco/kulala.nvim',
@@ -68,26 +69,44 @@ return {
   --   end
   -- },
   -- REST.nvim
-  {
-    "vhyrro/luarocks.nvim",
-    -- lazy = true,
-    event = "VeryLazy",
-
-    -- priority = 1000,
-    config = true,
-    opts = {
-      rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
-    }
-  },
+  -- {
+  --   "vhyrro/luarocks.nvim",
+  --   enabled = false,
+  --   lazy = true,
+  --   event = "VeryLazy",
+  --
+  --   -- priority = 1000,
+  --   config = true,
+  --   opts = {
+  --     rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
+  --   }
+  -- },
+  -- {
+  --   "rest-nvim/rest.nvim",
+  --   -- lazy = true,
+  --   enabled = false,
+  --   event = "VeryLazy",
+  --
+  --   ft = "http",
+  --   dependencies = { "luarocks.nvim" },
+  --   config = function()
+  --     require("rest-nvim").setup()
+  --   end,
+  -- },
   {
     "rest-nvim/rest.nvim",
-    event = "VeryLazy",
-
-    ft = "http",
-    dependencies = { "luarocks.nvim" },
     config = function()
-      require("rest-nvim").setup()
+      require("rest-nvim").setup({
+        env_file = ".rest-client.env.json", 
+      })
     end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      opts = function (_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        table.insert(opts.ensure_installed, "http")
+      end,
+    }
   },
   -- markdownPreview
   {

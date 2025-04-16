@@ -2,6 +2,7 @@ return {
     -- nivm-ufo folds
     {
         'kevinhwang91/nvim-ufo',
+          event = "BufReadPost",
         dependencies = 'kevinhwang91/promise-async',
         config = function()
             vim.o.foldcolumn = '1' -- '0' is not bad
@@ -74,7 +75,23 @@ return {
             window = {
                 position = 'right',
             },
-        },
+            filesystem = {
+                filtered_items = {
+                    -- visible = true, -- Show hidden files and directories
+                    hide_dotfiles = true, -- This ensures dotfiles (like .gitignore) are not hidden
+                    hide_gitignored = true,
+                },
+                git = {
+                    enable = true,  -- Enable git integration (makes Neo-tree aware of `.gitignore`)
+                    ignore_list = { -- You can also define additional ignores if needed
+                        ".git", ".gitignore", ".DS_Store", "node_modules",
+                    },
+                }
+            },
+        }
+        -- new changes
+
+        -- new change end
     },
     -- wilder
     {
@@ -138,5 +155,27 @@ return {
     {
         "sindrets/diffview.nvim",
         event = "VeryLazy",
-    },
+    }
+    -- {
+    --     "sphamba/smear-cursor.nvim",
+    --
+    --     opts = {
+    --         -- Smear cursor color. Defaults to Cursor GUI color if not set.
+    --         -- Set to "none" to match the text color at the target cursor position.
+    --         cursor_color = "#d3cdc3",
+    --
+    --         -- Background color. Defaults to Normal GUI background color if not set.
+    --         normal_bg = "#282828",
+    --
+    --         -- Smear cursor when switching buffers or windows.
+    --         smear_between_buffers = true,
+    --
+    --         -- Smear cursor when moving within line or to neighbor lines.
+    --         smear_between_neighbor_lines = true,
+    --
+    --         -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
+    --         -- Smears will blend better on all backgrounds.
+    --         legacy_computing_symbols_support = false,
+    --     },
+    -- }
 }
