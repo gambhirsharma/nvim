@@ -5,29 +5,37 @@ return {
   event = "VeryLazy",
   lazy = true,
   version = false, -- set this if you want to always pull the latest change
+  -- commit = "868c136",
+  --
   opts = {
-    -- add any opts here
    provider = "copilot",
     windows = {
+      -- position = "left",
       input = {
         height = 8,
       }
-    }
+    },
+      -- MCP Hub Setup
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        return hub:get_active_servers_prompt()
+      end,
+      -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
+      custom_tools = function()
+        return {
+          require("mcphub.extensions.avante").mcp_tool(),
+        }
+      end,
+
   },
+
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
 
   -- config = function()
-  --   require("avante").setup({
-  --     windows = {
-  --       input = {
-  --         height = 1,
-  --       }
-  --     }
-  --   })
+  --   require("avante").setup({})
   -- end,
 
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     "stevearc/dressing.nvim",

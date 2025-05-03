@@ -1,0 +1,34 @@
+{
+  "nativeMCPServers": [
+    
+  ],
+  "mcpServers": {
+    "playwright": {
+      "disabled_tools": [
+      ],
+      "args": [
+        "@playwright/mcp@latest"
+      ],
+      "command": "npx"
+    },
+    "remote-server": {
+      "headers": {
+        "Authorization": "Bearer ${API_KEY}"
+      },
+      "url": "https://api.example.com/mcp"
+    },
+    "fetch": {
+      "env": {
+        "SERVER_URL": null,
+        "API_KEY": "",
+        "DEBUG": "true",
+        "AUTH_HEADER": "BEARER ${API_KEY}"
+      },
+      "args": [
+        "mcp-server-fetch",
+        "$API_KEY"
+      ],
+      "command": "uvx"
+    }
+  }
+}
