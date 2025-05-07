@@ -43,6 +43,7 @@ return
       date_format = "%Y-%m-%d-%a",
       time_format = "%H:%M",
     },
-
+      -- solve the issue #2 `<render-markdown.nvim> is not working properly`
+      ui = {enable = false;}
   },
 }
