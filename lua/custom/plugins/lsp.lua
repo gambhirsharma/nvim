@@ -1,3 +1,17 @@
+-- Shared LSP capabilities
+local capabilities = vim.tbl_deep_extend(
+  "force",
+  vim.lsp.protocol.make_client_capabilities(),
+  require("cmp_nvim_lsp").default_capabilities()
+)
+
+-- Shared on_attach function
+local on_attach = function(_, bufnr)
+  local nmap = function(keys, func, desc)
+    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+  end
+end
+
 return {
   {
     'neovim/nvim-lspconfig',
@@ -150,7 +164,34 @@ return {
         elixirls = {},
         -- clangd = {},
         -- gopls = {},
-        yamlls = {},
+        yamlls = {
+          on_attach = on_attach,
+          capabilities = capabilities,
+          filetypes = { "yaml", "yml" },
+          flags = { debounce_text_changes = 150 },
+
+          settings = {
+            yaml = {
+              format = {
+                enable = true,
+                singleQuote = true,
+                printWidth = 120,
+              },
+              hover = true,
+              completion = true,
+              validate = true,
+            },
+            schemas = {
+            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+            ["http://json.schemastore.org/github-action"] = { ".github/action.{yml,yaml}" },
+            },
+            schemaStore = {
+              enable = true,
+              url = "https://www.schemastore.org/api/json/catalog.json",
+            },
+          }
+        },
+        --
         pyright = {},
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -166,6 +207,7 @@ return {
         cssls = {},
         astro = {},
 
+        terraformls = {},
 
         --
         -- swiftlint = {},
