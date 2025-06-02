@@ -21,11 +21,14 @@
 --         })
 --     end
 -- }
+--         ★  copilot.lua 131.56ms
+          -- ‒  copilot.lua/plugin/copilot.lua 0.24ms
+
 return {
-    "zbirenbaum/copilot-cmp",
-    event = "InsertEnter",
-    config = function () require("copilot_cmp").setup() end,
-    dependencies = {
+  "zbirenbaum/copilot-cmp",
+  event = "InsertEnter",
+  dependencies = {
+    {
       "zbirenbaum/copilot.lua",
       cmd = "Copilot",
       config = function()
@@ -35,4 +38,8 @@ return {
         })
       end,
     },
-  }
+  },
+  config = function()
+    require("copilot_cmp").setup()
+  end,
+}
