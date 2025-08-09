@@ -1,49 +1,43 @@
 return
-{
-  "epwalsh/obsidian.nvim",
-  lazy = true,
-  -- version = "*", -- recommended, use latest release instead of latest commit
-  ft = "markdown",
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-  --   "BufReadPre /Users/gambhirsharma/Documents/OBSIDIAN/**.md",
-  --   "BufNewFile /Users/gambhirsharma/Documents/OBSIDIAN/**.md",
-  --   "BufNewFile /Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita'degliStudidiRomaTorVergata/Engineering-Sciences/**.md",
-  -- },
-  dependencies = {
-    -- Required.
-    "nvim-lua/plenary.nvim",
-    lazy = true,
-
-    -- see below for full list of optional dependencies 👇
-  },
-  opts = {
-    workspaces = {
-      {
-        name = "OBSIDIAN",
-        path = "/Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita'degliStudidiRomaTorVergata/OBSIDIAN",
-        templates = {
-          folder = "assets/Template",
-          date_format = "%Y-%m-%d-%a",
-          time_format = "%H:%M",
+  {
+    "epwalsh/obsidian.nvim",
+    lazy = false,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      lazy = true,
+    },
+    opts = {
+      disable_frontmatter = true, -- fix the auto-formatting bug
+      workspaces = {
+        {
+          name = "OBSIDIAN",
+          path = "/Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita\'degliStudidiRomaTorVergata/OBSIDIAN",
+          --   templates = {
+          --     folder = "assets/Template",
+          --     date_format = "%Y-%m-%d-%a",
+          --     time_format = "%H:%M",
+          --   },
+        },
+        {
+          name = "Engineering-Sciences",
+          path =
+            "/Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita\'degliStudidiRomaTorVergata/Engineering-Sciences"
         },
       },
-      {
-        name = "Engineering-Sciences",
-        path =
-        "/Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita'degliStudidiRomaTorVergata/Engineering-Sciences"
+      -- see below for full list of options 👇
+      templates = {
+        folder =
+          "/Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita\'degliStudidiRomaTorVergata/OBSIDIAN/assets/Template",
+        date_format = "%Y-%m-%d-%a",
+        time_format = "%H:%M",
       },
-    },
-    -- see below for full list of options 👇
-    templates = {
-      folder =
-      "/Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita'degliStudidiRomaTorVergata/OBSIDIAN/assets/Template",
-      date_format = "%Y-%m-%d-%a",
-      time_format = "%H:%M",
-    },
+      -- writing down template for Erusmus job applicaton:
+      erusmus_job = {
+        folder = "/Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita'degliStudidiRomaTorVergata/OBSIDIAN/Coding/JOB/Company/ERUSMUS/ls",
+        tempalte = "/Users/gambhirsharma/Library/CloudStorage/OneDrive-Universita'degliStudidiRomaTorVergata/OBSIDIAN/assets/Template/snippets/Erusmus_Trainaship_Template.md"
+      },
       -- solve the issue #2 `<render-markdown.nvim> is not working properly`
-      ui = {enable = false;}
-  },
-}
+      ui = { enable = false, }
+    },
+  }
