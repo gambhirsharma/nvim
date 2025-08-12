@@ -1,0 +1,256 @@
+name: Neovim Startup Benchmark
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Neovim
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository ppa:neovim-ppa/unstable
+          sudo apt-get update
+          sudo apt-get install -y neovim
+
+      - name: Setup benchmark environment
+        run: |
+          mkdir -p ~/.config
+          ln -sf $GITHUB_WORKSPACE ~/.config/nvim
+
+      - name: Run startup benchmark
+        run: |
+          # Create benchmark script
+          cat > benchmark.lua << 'EOF'
+          -- Benchmark script
+          local start_time = vim.loop.hrtime()
+          
+          -- Track plugin loading times
+          local plugin_times = {}
+          local original_require = require
+          
+          require = function(name)
+            local plugin_start = vim.loop.hrtime()
+            local result = original_require(name)
+            local plugin_end = vim.loop.hrtime()
+            
+            if name:match("^[%w_%-]+$") then
+              plugin_times[name] = (plugin_end - plugin_start) / 1000000
+            end
+            
+            return result
+          end
+          
+          -- Load your config
+          pcall(function()
+            if vim.fn.filereadable(vim.fn.expand("~/.config/nvim/init.lua")) == 1 then
+              dofile(vim.fn.expand("~/.config/nvim/init.lua"))
+            elseif vim.fn.filereadable(vim.fn.expand("~/.config/nvim/init.vim")) == 1 then
+              vim.cmd("source ~/.config/nvim/init.vim")
+            end
+          end)
+          
+          -- Wait for lazy loading to complete
+          vim.defer_fn(function()
+            local total_time = (vim.loop.hrtime() - start_time) / 1000000
+            
+            -- Output results in JSON format
+            local results = {
+              total_startup_time = total_time,
+              plugin_times = plugin_times,
+              timestamp = os.date("%Y-%m-%d %H:%M:%S"),
+              commit = vim.fn.system("git rev-parse HEAD"):gsub("\n", ""),
+              nvim_version = vim.version()
+            }
+            
+            local json = vim.fn.json_encode(results)
+            local file = io.open("benchmark_results.json", "w")
+            if file then
+              file:write(json)
+              file:close()
+            end
+            
+            vim.cmd("qall!")
+          end, 1000)
+          EOF
+          
+          # Run benchmark
+          timeout 30s nvim --headless -u NONE -c "luafile benchmark.lua" || true
+
+      - name: Process benchmark results
+        run: |
+          python3 << 'EOF'
+          import json
+          import os
+          import subprocess
+          
+          def get_previous_benchmark():
+              try:
+                  # Try to get benchmark from previous commit
+                  result = subprocess.run([
+                      'git', 'show', 'HEAD~1:benchmark_results.json'
+                  ], capture_output=True, text=True)
+                  
+                  if result.returncode == 0:
+                      return json.loads(result.stdout)
+              except:
+                  pass
+              return None
+          
+          def format_time(ms):
+              if ms < 1:
+                  return f"{ms:.2f}ms"
+              elif ms < 1000:
+                  return f"{ms:.1f}ms"
+              else:
+                  return f"{ms/1000:.2f}s"
+          
+          def analyze_performance(current, previous):
+              if not previous:
+                  return "📊 **First benchmark run**\n"
+              
+              current_total = current['total_startup_time']
+              previous_total = previous['total_startup_time']
+              
+              diff = current_total - previous_total
+              percent_change = (diff / previous_total) * 100
+              
+              if abs(percent_change) < 5:
+                  status = "🟡 Similar"
+                  emoji = "➡️"
+              elif percent_change < 0:
+                  status = "🟢 Faster"
+                  emoji = "⚡"
+              else:
+                  status = "🔴 Slower"
+                  emoji = "🐌"
+              
+              analysis = f"## {status} Performance\n\n"
+              analysis += f"**Total startup time:** {format_time(current_total)} "
+              analysis += f"({emoji} {diff:+.1f}ms, {percent_change:+.1f}%)\n\n"
+              
+              return analysis
+          
+          def generate_report(current, previous):
+              report = "# 🚀 Neovim Startup Benchmark Report\n\n"
+              
+              # Performance analysis
+              report += analyze_performance(current, previous)
+              
+              # Current metrics
+              report += f"**Current startup time:** {format_time(current['total_startup_time'])}\n"
+              report += f"**Neovim version:** {current['nvim_version']['major']}.{current['nvim_version']['minor']}.{current['nvim_version']['patch']}\n"
+              report += f"**Commit:** `{current['commit'][:8]}`\n\n"
+              
+              # Top slowest plugins
+              plugins = current.get('plugin_times', {})
+              if plugins:
+                  sorted_plugins = sorted(plugins.items(), key=lambda x: x[1], reverse=True)[:10]
+                  
+                  report += "## 📦 Top 10 Slowest Plugins\n\n"
+                  report += "| Plugin | Load Time |\n"
+                  report += "|--------|----------|\n"
+                  
+                  for plugin, time in sorted_plugins:
+                      report += f"| `{plugin}` | {format_time(time)} |\n"
+                  
+                  report += "\n"
+              
+              # Plugin comparison if previous data exists
+              if previous and previous.get('plugin_times'):
+                  report += "## 📈 Plugin Performance Changes\n\n"
+                  
+                  current_plugins = current.get('plugin_times', {})
+                  previous_plugins = previous.get('plugin_times', {})
+                  
+                  changes = []
+                  for plugin in current_plugins:
+                      if plugin in previous_plugins:
+                          diff = current_plugins[plugin] - previous_plugins[plugin]
+                          if abs(diff) > 1:  # Only show changes > 1ms
+                              changes.append((plugin, diff, current_plugins[plugin]))
+                  
+                  if changes:
+                      changes.sort(key=lambda x: x[1], reverse=True)
+                      
+                      report += "| Plugin | Change | Current Time |\n"
+                      report += "|--------|--------|-------------|\n"
+                      
+                      for plugin, diff, current_time in changes[:10]:
+                          emoji = "🔴" if diff > 0 else "🟢"
+                          report += f"| `{plugin}` | {emoji} {diff:+.1f}ms | {format_time(current_time)} |\n"
+                  else:
+                      report += "*No significant plugin performance changes detected.*\n"
+              
+              return report
+          
+          # Load current results
+          try:
+              with open('benchmark_results.json', 'r') as f:
+                  current_results = json.load(f)
+          except:
+              print("❌ No benchmark results found")
+              exit(1)
+          
+          # Get previous results
+          previous_results = get_previous_benchmark()
+          
+          # Generate report
+          report = generate_report(current_results, previous_results)
+          
+          # Save report
+          with open('benchmark_report.md', 'w') as f:
+              f.write(report)
+          
+          print("✅ Benchmark analysis complete")
+          print(f"Total startup time: {current_results['total_startup_time']:.1f}ms")
+          EOF
+
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            try {
+              const report = fs.readFileSync('benchmark_report.md', 'utf8');
+              
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: report
+              });
+            } catch (error) {
+              console.log('Could not post comment:', error);
+            }
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: |
+            benchmark_results.json
+            benchmark_report.md
+          retention-days: 30
+
+      - name: Commit benchmark results
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add benchmark_results.json || true
+          git commit -m "📊 Update benchmark results [skip ci]" || true
+          git push || true
