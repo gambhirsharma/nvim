@@ -247,7 +247,7 @@ jobs:
           retention-days: 30
 
       - name: Commit benchmark results
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/gh-testing'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
