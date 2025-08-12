@@ -2,9 +2,9 @@ name: Neovim Startup Benchmark
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, gh-testing]
   pull_request:
-    branches: [main, master]
+    branches: [main, master, gh-testing]
 
 jobs:
   benchmark:
