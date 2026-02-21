@@ -6,7 +6,7 @@ return {
   --autoclose tags
   { 'm4xshen/autoclose.nvim' },
   -- wakatime
-  { 'wakatime/vim-wakatime', lazy = false },
+  -- { 'wakatime/vim-wakatime', lazy = false },
   -- comment
   {
     "folke/ts-comments.nvim",
@@ -16,11 +16,11 @@ return {
     -- enabled = vim.fn.has("nvim-0.10.0") == 1,
   },
   -- discord
-  {
-    'andweeb/presence.nvim',
-    enabled = false,
-    event = 'VeryLazy',
-  },
+  -- {
+  --   'andweeb/presence.nvim',
+  --   enabled = false,
+  --   event = 'VeryLazy',
+  -- },
   -- hardtime
   -- {
   --   'm4xshen/hardtime.nvim',
@@ -93,21 +93,21 @@ return {
   --     require("rest-nvim").setup()
   --   end,
   -- },
-  {
-    "rest-nvim/rest.nvim",
-    config = function()
-      require("rest-nvim").setup({
-        env_file = ".rest-client.env.json", 
-      })
-    end,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      opts = function (_, opts)
-        opts.ensure_installed = opts.ensure_installed or {}
-        table.insert(opts.ensure_installed, "http")
-      end,
-    }
-  },
+  -- {
+  --   "rest-nvim/rest.nvim",
+  --   config = function()
+  --     require("rest-nvim").setup({
+  --       env_file = ".rest-client.env.json", 
+  --     })
+  --   end,
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     opts = function (_, opts)
+  --       opts.ensure_installed = opts.ensure_installed or {}
+  --       table.insert(opts.ensure_installed, "http")
+  --     end,
+  --   }
+  -- },
   -- markdownPreview
   {
     "iamcco/markdown-preview.nvim",

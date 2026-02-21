@@ -1,5 +1,5 @@
-return
-{
-  "yuratomo/w3m.vim",
-  event = "VeryLazy",
-}
+return {}
+-- {
+--   "yuratomo/w3m.vim",
+--   event = "VeryLazy",
+-- }
