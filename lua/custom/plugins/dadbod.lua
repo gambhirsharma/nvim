@@ -22,3 +22,8 @@ return {
     end
   }
 }
+
+--- Thing to remember using Dadbod DB
+--- ** work only in InsertEnter mode **
+--- ** sqlite:notes.db **  --> this is how you add sqlite .db file 
+--- ** use <Leader> + S to run the command
