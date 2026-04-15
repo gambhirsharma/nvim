@@ -24,7 +24,7 @@ require("luasnip.loaders.from_lua").load({
 })
 
 require('luasnip.loaders.from_vscode').lazy_load()
-require('vim-react-snippets').lazy_load()
+-- require('vim-react-snippets').lazy_load()
 
 require('lspsaga').setup({})
 
