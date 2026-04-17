@@ -25,7 +25,7 @@
           -- ‒  copilot.lua/plugin/copilot.lua 0.24ms
 
 return {
-  "zbirenbaum/copilot-cmp",
+  "gambhirsharma/copilot-cmp",
   event = "InsertEnter",
   dependencies = {
     {
