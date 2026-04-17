@@ -1,16 +1,19 @@
+-- #FIX: deadcode
+--
 -- Shared LSP capabilities
-local capabilities = vim.tbl_deep_extend(
-  "force",
-  vim.lsp.protocol.make_client_capabilities(),
-  require("cmp_nvim_lsp").default_capabilities()
-)
+-- local capabilities = vim.tbl_deep_extend(
+--   "force",
+--   vim.lsp.protocol.make_client_capabilities(),
+--   require("cmp_nvim_lsp").default_capabilities()
+-- )
+--
 
 -- Shared on_attach function
-local on_attach = function(_, bufnr)
-  local nmap = function(keys, func, desc)
-    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
-  end
-end
+-- local on_attach = function(_, bufnr)
+--   local nmap = function(keys, func, desc)
+--     vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+--   end
+-- end
 
 return {
   {
@@ -31,17 +34,11 @@ return {
       { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover, {
-          border = "rounded" -- Use "single", "double", "rounded", "solid", or "shadow"
-        }
-      )
-      -- disable line diagnostics
-      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = false
-        }
-      )
+
+      -- display error display inline. Open Error details using `<leader>df`
+      vim.diagnostic.config({
+        virtual_text = false,
+      })
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -118,7 +115,7 @@ return {
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
-          map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          map('K', function() vim.lsp.buf.hover {border = 'rounded' } end, 'Hover Documentation')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -160,6 +157,7 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+-- #######   LSP server list
       local servers = {
         elixirls = {},
         -- clangd = {},
@@ -193,7 +191,7 @@ return {
         },
         --
         pyright = {},
-        rust_analyzer = {},
+        -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
