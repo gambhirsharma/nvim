@@ -16,21 +16,23 @@ function TelescopeObsidianCommands()
   end
 
   -- Show commands in Telescope
-  require("telescope.pickers").new({}, {
-    prompt_title = "Obsidian.nvim Commands",
-    finder = require("telescope.finders").new_table {
-      results = obsidian_commands,
-    },
-    sorter = require("telescope.config").values.generic_sorter({}),
-    attach_mappings = function(_, map)
-      map("i", "<CR>", function(prompt_bufnr)
-        local selection = action_state.get_selected_entry()
-        actions.close(prompt_bufnr)
-        vim.cmd(selection[1])
-      end)
-      return true
-    end,
-  }):find()
+  require("telescope.pickers")
+    .new({}, {
+      prompt_title = "Obsidian.nvim Commands",
+      finder = require("telescope.finders").new_table({
+        results = obsidian_commands,
+      }),
+      sorter = require("telescope.config").values.generic_sorter({}),
+      attach_mappings = function(_, map)
+        map("i", "<CR>", function(prompt_bufnr)
+          local selection = action_state.get_selected_entry()
+          actions.close(prompt_bufnr)
+          vim.cmd(selection[1])
+        end)
+        return true
+      end,
+    })
+    :find()
 end
 
 -- Keybinding to show Obsidian commands

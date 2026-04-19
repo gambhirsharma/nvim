@@ -4,9 +4,9 @@
 -- See the kickstart.nvim README for more information
 return {
   --autoclose tags
-  { 'm4xshen/autoclose.nvim' },
+  { "m4xshen/autoclose.nvim" },
   -- wakatime
-  { 'wakatime/vim-wakatime', lazy = false },
+  { "wakatime/vim-wakatime", lazy = false },
   -- comment
   {
     "folke/ts-comments.nvim",
@@ -17,9 +17,9 @@ return {
   },
   -- discord
   {
-    'andweeb/presence.nvim',
+    "andweeb/presence.nvim",
     enabled = false,
-    event = 'VeryLazy',
+    event = "VeryLazy",
   },
   -- hardtime
   -- {
@@ -40,24 +40,24 @@ return {
   -- lazy git
   -- nvim v0.8.0
   {
-    'kdheepak/lazygit.nvim',
+    "kdheepak/lazygit.nvim",
     event = "VeryLazy",
 
     cmd = {
-      'LazyGit',
-      'LazyGitConfig',
-      'LazyGitCurrentFile',
-      'LazyGitFilter',
-      'LazyGitFilterCurrentFile',
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
     },
     -- optional for floating window border decoration
     dependencies = {
-      'nvim-lua/plenary.nvim',
+      "nvim-lua/plenary.nvim",
     },
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
-      { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
     },
   },
 
@@ -97,16 +97,16 @@ return {
     "rest-nvim/rest.nvim",
     config = function()
       require("rest-nvim").setup({
-        env_file = ".rest-client.env.json", 
+        env_file = ".rest-client.env.json",
       })
     end,
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      opts = function (_, opts)
+      opts = function(_, opts)
         opts.ensure_installed = opts.ensure_installed or {}
         table.insert(opts.ensure_installed, "http")
       end,
-    }
+    },
   },
   -- markdownPreview
   {
@@ -138,8 +138,7 @@ return {
     ft = { "markdown" },
   },
   -- del buffer
-  { 'ojroques/nvim-bufdel', event = "VeryLazy",
-  },
+  { "ojroques/nvim-bufdel", event = "VeryLazy" },
   {
     "lervag/vimtex",
     lazy = false, -- we don't want to lazy load VimTeX
@@ -149,11 +148,11 @@ return {
       vim.g.vimtex_view_method = "skim"
       vim.g.vimtex_view_skim_sync = 1
       -- vim.g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
-      vim.g.vimtex_view_general_options = 'open -a Skim'
+      vim.g.vimtex_view_general_options = "open -a Skim"
       --
-      vim.g.vimtex_compiler_method = 'tectonic'
+      vim.g.vimtex_compiler_method = "tectonic"
       vim.g.maplocalleader = ","
-    end
+    end,
   },
   -- yaml
   {

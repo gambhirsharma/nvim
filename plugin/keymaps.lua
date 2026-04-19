@@ -1,7 +1,7 @@
 vim.keymap.set("i", "jj", "<esc>", { desc = "Normal mode" })
 vim.keymap.set("n", "<leader>qq", ":q!<CR>", { desc = "Exit" })
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Copy to registery" })
-vim.keymap.set({ "n","v", }, "<A-i>", ':ToggleTerm direction=float<CR>', { desc = "Toggle Terminal Float" })
+vim.keymap.set({ "n", "v" }, "<A-i>", ":ToggleTerm direction=float<CR>", { desc = "Toggle Terminal Float" })
 vim.keymap.set("t", "<A-i>", [[<C-\><C-n>:ToggleTerm direction=float<CR>]], { desc = "Toggle Terminal Float" })
 
 -- go to  beginning and end
@@ -17,7 +17,6 @@ vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move up" })
 -- vim.keymap.set("n", "<leader>ct", "<cmd>CodyToggle<CR>", { desc = "[C]ody [T]oggle", remap = true })
 -- vim.keymap.set("v", "<leader>ct", "<cmd>CodyTask<CR>", { desc = "[C]ody [T]ask", remap = true })
 -- vim.keymap.set("v", "<leader>ce", "<cmd>CodyExplain<CR>", { desc = "[C]ody [E]xplain", remap = true })
-
 
 -- vim.keymap.set("n", "<leader>cd", ":CodyTask<Space>", {desc = "Cody Task", remap = true})
 
@@ -45,11 +44,8 @@ vim.keymap.set("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
-
-
 -- open finder
 vim.keymap.set("n", "<leader>of", ":! open . <CR>", { desc = "Open Finder [.] dir" })
-
 
 -- vim.keymap.set("n", ";", ":", { desc = "Enter command mode" })
 
@@ -58,9 +54,7 @@ vim.keymap.set("n", "<leader>th", ":Telescope colorscheme<CR>", { desc = "color 
 vim.keymap.set("v", "K", ":move '<-2<CR>gv=gv", { desc = "Move selection up" })
 vim.keymap.set("v", "J", ":move '>+1<CR>gv=gv", { desc = "Move selection down" })
 
-
 -- Notes
-vim.keymap.set('n', "<leader>nt", "<cmd>Telescope find_files cwd=~/Documents/Notes<CR>", { desc = "Notes" })
-
+vim.keymap.set("n", "<leader>nt", "<cmd>Telescope find_files cwd=~/Documents/Notes<CR>", { desc = "Notes" })
 
 -- diganostics

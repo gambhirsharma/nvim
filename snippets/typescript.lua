@@ -22,7 +22,10 @@ return {
   ),
 
   s("impfd", fmta([[import <> from "<>"]], { i(0), i(1) })),
-  s("trfce", fmt([[
+  s(
+    "trfce",
+    fmt(
+      [[
     import React from 'react';
 
     interface {}Props {{
@@ -38,13 +41,16 @@ return {
     }};
 
     export default {};
-]], {
-    rep(1),
-    i(0),
-    i(1, vim.fn.expand("%:t")),
-    rep(1),
-    i(3),
-    i(2),
-    rep(1)
-  }))
+]],
+      {
+        rep(1),
+        i(0),
+        i(1, vim.fn.expand("%:t")),
+        rep(1),
+        i(3),
+        i(2),
+        rep(1),
+      }
+    )
+  ),
 }

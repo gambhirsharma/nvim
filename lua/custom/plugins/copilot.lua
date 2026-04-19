@@ -22,7 +22,7 @@
 --     end
 -- }
 --         ★  copilot.lua 131.56ms
-          -- ‒  copilot.lua/plugin/copilot.lua 0.24ms
+-- ‒  copilot.lua/plugin/copilot.lua 0.24ms
 
 return {
   "gambhirsharma/copilot-cmp",

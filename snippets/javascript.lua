@@ -21,6 +21,6 @@ return {
       { i(1), i(2), i(0) }
     )
   ),
-  
+
   s("impfd", fmta([[import <> from "<>"]], { i(0), i(1) })),
 }

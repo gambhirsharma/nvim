@@ -1,7 +1,8 @@
-return { s(
-  "css",
-  fmta(
-    [[
+return {
+  s(
+    "css",
+    fmta(
+      [[
  html{
   --zoom: 120;
   --black: #000;
@@ -53,9 +54,9 @@ return { s(
   align-items: center;
   justify-content: center;
  } ]],
-    {}
-  )
-),
+      {}
+    )
+  ),
 
   s("px", fmta([[ calc(<> *var(--px));]], { i(1) })),
   s("bgred", t("background: red;")),

@@ -5,7 +5,6 @@ vim.opt_local.softtabstop = 2 -- Number of spaces that a <Tab> counts for while 
 vim.opt_local.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
 vim.opt_local.expandtab = true -- Expand tab to 2 spaces
 
-
 vim.opt_local.foldmethod = "manual"
 vim.opt_local.foldenable = true
 
@@ -47,11 +46,11 @@ vim.api.nvim_buf_set_keymap(
   { noremap = true, silent = true, desc = "Go to next block at same indent" }
 )
 -- LSP Configuration
-require("lspconfig").yamlls.setup {
+require("lspconfig").yamlls.setup({
   settings = {
     yaml = {
       validate = true,
-       schemas = {
+      schemas = {
         kubernetes = "k8s-*.yaml",
         ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
         ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
@@ -63,11 +62,11 @@ require("lspconfig").yamlls.setup {
       },
     },
   },
-}
+})
 
 -- Autocompletion
-local cmp = require "cmp"
-cmp.setup.buffer {
+local cmp = require("cmp")
+cmp.setup.buffer({
   sources = {
     { name = "luasnip", priority = 90 },
     { name = "nvim_lsp" },
@@ -85,8 +84,20 @@ cmp.setup.buffer {
       },
     },
   },
-}
+})
 
 -- Add LSP debugging
-vim.api.nvim_buf_set_keymap(0, "n", "<leader>dl", ":LspInfo<CR>", { noremap = true, silent = true, desc = "Show LSP Info" })
-vim.api.nvim_buf_set_keymap(0, "n", "<leader>dd", ":LspLog<CR>", { noremap = true, silent = true, desc = "Show LSP Log" })
+vim.api.nvim_buf_set_keymap(
+  0,
+  "n",
+  "<leader>dl",
+  ":LspInfo<CR>",
+  { noremap = true, silent = true, desc = "Show LSP Info" }
+)
+vim.api.nvim_buf_set_keymap(
+  0,
+  "n",
+  "<leader>dd",
+  ":LspLog<CR>",
+  { noremap = true, silent = true, desc = "Show LSP Log" }
+)

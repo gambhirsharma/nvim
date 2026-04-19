@@ -1,14 +1,15 @@
 return {
   {
-    'tpope/vim-dadbod', event = 'InsertEnter',
+    "tpope/vim-dadbod",
+    event = "InsertEnter",
   },
   {
-    'kristijanhusak/vim-dadbod-completion',
-    event = 'InsertEnter',
+    "kristijanhusak/vim-dadbod-completion",
+    event = "InsertEnter",
   },
   {
-    'kristijanhusak/vim-dadbod-ui',
-    event = 'InsertEnter',
+    "kristijanhusak/vim-dadbod-ui",
+    event = "InsertEnter",
     init = function()
       local data_path = vim.fn.stdpath("data")
 
@@ -19,11 +20,11 @@ return {
       vim.g.db_ui_use_nerd_fonts = true
 
       vim.g.db_ui_execute_on_save = false
-    end
-  }
+    end,
+  },
 }
 
 --- Thing to remember using Dadbod DB
 --- ** work only in InsertEnter mode **
---- ** sqlite:notes.db **  --> this is how you add sqlite .db file 
+--- ** sqlite:notes.db **  --> this is how you add sqlite .db file
 --- ** use <Leader> + S to run the command

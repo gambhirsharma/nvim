@@ -19,8 +19,7 @@ end
 -- Set mappings
 local opts = { noremap = true, silent = true }
 
-vim.api.nvim_set_keymap('n', '<Leader>W', '<Plug>(DBUI_SaveQuery)', opts)
-vim.api.nvim_set_keymap('n', '<Leader>E', '<Plug>(DBUI_EditBindParameters)', opts)
-vim.api.nvim_set_keymap('n', '<Leader>S', '<Plug>(DBUI_ExecuteQuery)', opts)
-vim.api.nvim_set_keymap('v', '<Leader>S', '<Plug>(DBUI_ExecuteQuery)', opts)
-
+vim.api.nvim_set_keymap("n", "<Leader>W", "<Plug>(DBUI_SaveQuery)", opts)
+vim.api.nvim_set_keymap("n", "<Leader>E", "<Plug>(DBUI_EditBindParameters)", opts)
+vim.api.nvim_set_keymap("n", "<Leader>S", "<Plug>(DBUI_ExecuteQuery)", opts)
+vim.api.nvim_set_keymap("v", "<Leader>S", "<Plug>(DBUI_ExecuteQuery)", opts)
