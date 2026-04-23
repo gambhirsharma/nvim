@@ -17,7 +17,7 @@ luasnip.config.set_config({
 })
 
 require("luasnip.loaders.from_lua").load({
-  paths = "~/.config/kickstart/snippets",
+  paths = { vim.fn.stdpath("config") .. "/snippets" },
   default_priority = 2000,
   override_priority = 2000,
 })
