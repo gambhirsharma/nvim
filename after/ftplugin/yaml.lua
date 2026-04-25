@@ -46,7 +46,7 @@ vim.api.nvim_buf_set_keymap(
   { noremap = true, silent = true, desc = "Go to next block at same indent" }
 )
 -- LSP Configuration
-require("lspconfig").yamlls.setup({
+vim.lsp.config('yamlls', {
   settings = {
     yaml = {
       validate = true,
@@ -63,6 +63,7 @@ require("lspconfig").yamlls.setup({
     },
   },
 })
+vim.lsp.enable('yamlls')
 
 -- Autocompletion
 local cmp = require("cmp")
