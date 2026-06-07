@@ -20,8 +20,8 @@ return {
       }
       styles.night = vim.tbl_extend("force", styles.night, darker_night_colors)
 
-      vim.cmd.colorscheme("tokyonight-night")
-      -- vim.cmd.colorscheme 'tokyonight-day'
+      local ok, state = pcall(require, "custom.theme_state")
+      vim.cmd.colorscheme(ok and state or "tokyonight-night")
       vim.cmd.hi("Comment gui=none")
     end,
   },
@@ -69,22 +69,22 @@ return {
   --   vim.cmd.colorscheme 'gruvbox-light'
   -- end
   -- },
-  -- {
-  --   'rose-pine/neovim',
-  --   lazy = true,
-  --   name = 'rose-pine',
-  -- priority = 1000,
-  -- config = function()
-  --   require('rose-pine').setup {
-  --     styles = {
-  --       bold = true,
-  --       italic = true,
-  --       transparency = true,
-  --     },
-  --   }
-  -- vim.cmd.colorscheme 'rose-pine'
-  -- end,
-  -- },
+  {
+    'rose-pine/neovim',
+    lazy = true,
+    name = 'rose-pine',
+  priority = 1000,
+  config = function()
+    require('rose-pine').setup {
+      styles = {
+        bold = true,
+        italic = true,
+        transparency = true,
+      },
+    }
+    vim.cmd.colorscheme 'rose-pine'
+  end,
+  },
   -- {
   --   'Shatur/neovim-ayu',
   --       lazy = true,
