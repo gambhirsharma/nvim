@@ -57,4 +57,9 @@ vim.keymap.set("v", "J", ":move '>+1<CR>gv=gv", { desc = "Move selection down" }
 -- Notes
 vim.keymap.set("n", "<leader>nt", "<cmd>Telescope find_files cwd=~/Documents/Notes<CR>", { desc = "Notes" })
 
+-- copy file path to clipboard
+vim.keymap.set('n', '<leader>fp', function()
+  vim.fn.setreg('+', vim.fn.expand('%:p'))
+end, { desc = "Copy [F]ile [P]ath" })
+
 -- diganostics
