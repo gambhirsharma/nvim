@@ -1,7 +1,8 @@
 -- copy from 
 -- https://github.com/adibhanna/nvim/blob/main/ftplugin/go.lua
 --
-vim.o.tabstop = 4
+vim.bo.tabstop = 2
+vim.bo.shiftwidth = 2
 
 -- ════════════════════════════════════════════════════════════════════════════
 -- Go Tools - Custom commands for Go development
